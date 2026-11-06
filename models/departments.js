@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Departments.hasMany(models.Student,{
+        as: "students",
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
       })

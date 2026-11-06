@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
 
       Student.belongsTo(models.Departments, {
         foreignKey: departmentId,
-        as: Departments,
+        as: "department",
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
       })
