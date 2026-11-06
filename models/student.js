@@ -36,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false
       },
       email: {
-        type: DataTypes.ENUM,
+        type: DataTypes.STRING,
         allowNull: false,
         unique: true
       },
