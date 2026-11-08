@@ -25,11 +25,11 @@ const createStudentValidation = (req, res, next)=>{
 
     // console.log(error.details);
     
-  if (error) {
-    return res.status(400).json({
-      message: error.details[0].message
-    })
-  }
+    if (error) {
+        return res.status(400).json({
+        message: error.details[0].message
+        })
+    }
 next()
 }
 

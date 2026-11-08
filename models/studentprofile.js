@@ -12,8 +12,8 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       StudentProfile.belongsTo(models.Student, {
-        foreignKey: departmentId,
-        as: "department",
+        foreignKey: 'studentId',
+        as: "student",
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
       })}
@@ -28,6 +28,7 @@ module.exports = (sequelize, DataTypes) => {
 
       studentId: {
         type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         allowNull: false,
         unique: true,
         references: {
