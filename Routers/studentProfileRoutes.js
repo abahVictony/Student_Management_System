@@ -1,5 +1,6 @@
 const express = require('express')
 const { createStudentProfile, getStudentProfile, updateStudentProfile, deleteStudentProfile } = require('../controllers/studentprofileController')
+
 const { createStudentProfileValidation, updateStudentProfileValidation } = require('../Middlewares/studentProfileValidation')
 
 const router = express.Router()
