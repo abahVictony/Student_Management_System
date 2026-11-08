@@ -23,7 +23,7 @@ const createDepartmentValidation = (req,res, next) =>{
 
 const updateDepartmentValidation = (req,res,next) =>{
     const updateDepartmentSchema = Joi.object({
-        department_Name: Joi.string().required()
+        department_Name: Joi.string().optional()
     })
 
 
