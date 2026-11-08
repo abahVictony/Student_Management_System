@@ -27,7 +27,7 @@ app.use(studentRoute)
 const dbConnect = async()=>{
 try {
     await sequelize.authenticate()
-    console.log('Connection to Server Established Successfully')
+    console.log('Database connection Established Successfully')
 } catch (error) {
     console.error('Failed to connect to Database', error.message)
 }
