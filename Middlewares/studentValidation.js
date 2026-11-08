@@ -18,6 +18,8 @@ const createStudentValidation = (req, res, next)=>{
             "any.required": "The email field is required",
         }),
 
+        status:Joi.string().valid('Active','Suspended', 'Expelled')
+
         })
     
 

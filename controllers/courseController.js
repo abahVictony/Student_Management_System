@@ -15,7 +15,8 @@ const createCourse = async(req, res)=> {
         const newCourse = await Course.create({
             courseCode, 
             courseTitle, 
-            creditUnit
+            creditUnit,
+            studentId
         })
 
         return res.status(201).json({messsage:"Course successfully created", data:newCourse})

@@ -2,9 +2,9 @@ const Joi = require('joi');
 const { Model } = require('sequelize');
 
 
-const createDepartmentValidation = (req,res) =>{
+const createDepartmentValidation = (req,res, next) =>{
     const createDepartmentSchema = Joi.object({
-        department_name: Joi.string().required()
+        department_Name: Joi.string().required()
     })
 
 
@@ -21,9 +21,9 @@ const createDepartmentValidation = (req,res) =>{
 }
 
 
-const updateDepartmentValidation = (req,res) =>{
+const updateDepartmentValidation = (req,res,next) =>{
     const updateDepartmentSchema = Joi.object({
-        department_name: Joi.string().required()
+        department_Name: Joi.string().required()
     })
 
 

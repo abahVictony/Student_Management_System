@@ -18,7 +18,7 @@ const createDepartment = async (req, res) => {
      })
 
      return res.status(201).json({
-        message: 'User created successfully',
+        message: 'Department created successfully',
         data: newDepartment
      })
 
@@ -79,7 +79,7 @@ const getOneDepartment = async (req, res) => {
 const updateDepartment = async(req, res)=>{
     try{
         const { id } = req.params
-        const { department_name } = req.body
+        const { department_Name } = req.body
         const department = await Departments.findByPk(id)
 
         if (!department){
@@ -88,7 +88,7 @@ const updateDepartment = async(req, res)=>{
             })
         }
 
-        const updateDepartment = await Departments.update({ department_name }, {where: {id}})
+        const updateDepartment = await Departments.update({ department_Name }, {where: {id}})
 
         
     return res.status(201).json({

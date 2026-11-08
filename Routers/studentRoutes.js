@@ -6,12 +6,12 @@ const { createStudentValidation } = require('../Middlewares/studentValidation');
 const router = express.Router()
 
 
-router.post('/newStudent',createStudentValidation, createStudent)
+router.post('/createStudent/:departmentId',createStudentValidation, createStudent)
 router.get('/allStudents', getAllStudents)
-router.get('/oneStudent', getOneStudentWhereClause)
-router.get('/getonestudent/id',  getOneStudent)
-router.patch('/updateStudent', updateStudent)
-router.delete('/deleteStudent', deleteStudent)
+router.get('/oneStudent/:id', getOneStudentWhereClause)
+router.get('/getonestudent/:id',  getOneStudent)
+router.patch('/updateStudent/:id', updateStudent)
+router.delete('/deleteStudent/:id', deleteStudent)
 
 
 module.exports = router

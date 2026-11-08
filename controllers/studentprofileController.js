@@ -21,7 +21,8 @@ const createStudentProfile = async (req, res) => {
       gender,
       guardianName,
       guardianPhone,
-      bio
+      bio,
+      studentId
     });
 
     return res.status(201).json({

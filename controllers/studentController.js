@@ -1,4 +1,4 @@
-const { Student, Department, StudentProfile } = require('../models')
+const { Student, Departments, StudentProfile, Course } = require('../models')
 
 
 const createStudent = async (req, res) =>{
@@ -6,7 +6,8 @@ const createStudent = async (req, res) =>{
         const { departmentId } = req.params
         const { firstName, lastName, email, status } = req.body
 
-        const department = await Department.findByPk(departmentId)
+        const department = await Departments.findByPk(departmentId)
+
         if(!department){
             return res.status(404).json({message: "Department not found"})
         }
@@ -22,7 +23,8 @@ const createStudent = async (req, res) =>{
             firstName,
             lastName,
             email,
-            status
+            status,
+            departmentId
         })
 
          return res.status(201).json({
