@@ -42,19 +42,19 @@ const updateCourseValidation = (req,res,next) => {
         courseCode: Joi.string()
             .trim()
             .uppercase()
-            .required(),
+            .optional(),
 
         courseTitle: Joi.string()
             .trim()
             .min(3)
             .max(100)
-            .required(),
+            .optional(),
 
         creditUnit: Joi.number()
             .integer()
             .min(1)
             .max(6)
-            .required()
+            .optional()
         });
 
 

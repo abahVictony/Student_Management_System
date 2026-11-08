@@ -6,8 +6,8 @@ const { createStudentProfileValidation, updateStudentProfileValidation } = requi
 const router = express.Router()
 
 router.post('/newStudentProfile/:studentId',createStudentProfileValidation, createStudentProfile)
-router.get('/getProfile', getStudentProfile)
-router.patch('/updateProfile', updateStudentProfileValidation, updateStudentProfile)
-router.delete('/deleteProfile', deleteStudentProfile)
+router.get('/getProfile/:id', getStudentProfile)
+router.patch('/updateProfile/:id', updateStudentProfileValidation, updateStudentProfile)
+router.delete('/deleteProfile/:id', deleteStudentProfile)
 
 module.exports = router
