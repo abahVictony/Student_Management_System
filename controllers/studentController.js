@@ -1,4 +1,4 @@
-const { Student, Departments, StudentProfile, Course } = require('../models')
+const { Student, Departments, StudentProfile, Course, StudentCourse  } = require('../models')
 
 
 const createStudent = async (req, res) =>{
@@ -58,21 +58,19 @@ const getOneStudent = async(req,res) => {
         const { id } = req.params;
         const oneStudent = await Student.findByPk(id, {
             include :{
-                model:StudentCourse,
-                include :{
-                    model: Course,
-                    as: 'course',
-                   attributes: ["courseCourse", "courseTitle", "creditUnit"]
-                },
+                model:Course,
+                include:{ through:"StudentCouse"}
+                   
+            },
 
-                include:{
-                    model: StudentProfile,
-                    as: 'studentProfile',
-                    attributes:[ "gender", "phonenumber"]
+            include:{
+                model: StudentProfile,
+                as: 'studentProfile',
+                attributes:[ "gender", "phonenumber"]
 
-                }
             }
         })
+        
 
         if(!oneStudent){
                 return res.status(404).json({message: "Student not found"})
@@ -90,26 +88,7 @@ const getOneStudent = async(req,res) => {
 }
 
 
-const getOneStudentWhereClause = async (req, res) => {
-    try {
-        const { id } = req.params;
-        const student = await Student.findAll({ where: { id } });
 
-        if (student.length == 0) {
-            return res.status(404).json({
-                message: "Student not found"
-            })
-        }
-        return res.status(200).json({
-            message: "Student Found",
-            data: student
-        })
-    } catch (error) {
-        return res.status(500).json({
-            message: error.message
-        })
-    }
-}
 
 const updateStudent = async(req, res) =>{
     const {id} = req.params
@@ -161,7 +140,6 @@ module.exports = {
     createStudent,
     getAllStudents,
     getOneStudent,
-    getOneStudentWhereClause,
     updateStudent,
     deleteStudent
 }

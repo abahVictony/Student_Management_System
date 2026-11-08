@@ -1,4 +1,4 @@
-const { Course, Student, StudentCourse } = ("../models")
+const { Course, Student, StudentCourse } = require("../models")
 
 
 const createCourse = async(req, res)=> {
@@ -47,14 +47,17 @@ const getOneCourse = async(req,res) => {
         const { id } = req.params;
         const oneCourse = await Course.findByPk(id, {
             include :{
-                model:StudentCourse,
-                include :{
-                    model: Student,
+                    model:Student,
                     as: 'students',
-                    attributes: ["firstName", "lastName"]
+                    attributes: ["firstName", "lastName"],
+                     through:{
+                        model: StudentCourse,
+                        
+                     },
+
                 }
             }
-        })
+        )
 
         if(!oneCourse){
                 return res.status(404).json({message: "Course not found"})
@@ -79,7 +82,7 @@ const updateCourse = async (req, res)=>{
 
         const course = await Course.findByPk(id)
 
-        if(course){
+        if(!course){
             return res.status(404).json({message:"Course not found"
             })
         }

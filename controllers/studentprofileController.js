@@ -36,10 +36,10 @@ const createStudentProfile = async (req, res) => {
 
 const getStudentProfile = async (req, res) => {
   try {
-    const { studentId } = req.params;
+    const { id } = req.params;
 
     const profile = await StudentProfile.findOne({
-      where: { studentId },
+      where: { id },
       include: [
         {
           model: Student,
@@ -64,10 +64,10 @@ const getStudentProfile = async (req, res) => {
 
 const updateStudentProfile = async (req, res) => {
   try {
-    const { studentId } = req.params;
+    const { id } = req.params;
     const {gender, address, dateOfBirth, phonenumber, guardianName ,guardianPhone, bio} = req.body;
 
-    const profile = await StudentProfile.findOne({ where: { studentId } });
+    const profile = await StudentProfile.findOne({ where: { id } });
 
     if (!profile) {
       return res.status(404).json({ message: 'Student profile not found' });
@@ -86,7 +86,7 @@ const updateStudentProfile = async (req, res) => {
 
     return res.status(200).json({
       message: 'Student profile updated successfully',
-      data: profile,
+      data: updateStudentProfile,
     });
 
   } catch (error) {
@@ -97,9 +97,9 @@ const updateStudentProfile = async (req, res) => {
 
 const deleteStudentProfile = async (req, res) => {
   try {
-    const { studentId } = req.params;
+    const { id } = req.params;
 
-    const profile = await StudentProfile.findOne({ where: { studentId } });
+    const profile = await StudentProfile.findOne({ where: { id } });
 
     if (!profile) {
       return res.status(404).json({ message: 'Student profile not found' });
