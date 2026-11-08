@@ -2,7 +2,8 @@ const { StudentProfile, Student } = require('../models');
 
 const createStudentProfile = async (req, res) => {
   try {
-    const { studentId, gender, address, dateOfBirth, phonenumber, guardianName ,guardianPhone, bio} = req.body;
+    const { studentId } = req.params
+    const { gender, address, dateOfBirth, phonenumber, guardianName ,guardianPhone, bio } = req.body;
     const student = await Student.findByPk(studentId);
     if (!student) {
       return res.status(404).json({ message: 'Student not found' });
@@ -14,14 +15,14 @@ const createStudentProfile = async (req, res) => {
     }
 
     const profile = await StudentProfile.create({
-      studentId,
       phonenumber,
       address,
       dateOfBirth,
       gender,
       guardianName,
       guardianPhone,
-      bio
+      bio,
+      studentId
     });
 
     return res.status(201).json({
@@ -72,7 +73,7 @@ const updateStudentProfile = async (req, res) => {
       return res.status(404).json({ message: 'Student profile not found' });
     }
 
-    await profile.update({
+    const updateStudentProfile = await profile.update({
         gender,
         address,
         dateOfBirth,
@@ -81,7 +82,7 @@ const updateStudentProfile = async (req, res) => {
         guardianPhone,
         bio
       
-    });
+    },{where: {id}});
 
     return res.status(200).json({
       message: 'Student profile updated successfully',

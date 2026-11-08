@@ -13,16 +13,27 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
 
       Student.belongsTo(models.Departments, {
-        foreignKey: departmentId,
+        foreignKey: 'departmentId',
         as: "department",
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
       })
 
       Student.hasOne(models.StudentProfile, {
+        as: 'studentProfile',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
       })
+
+      Student.belongsToMany(models.Course,{
+            through: 'studentCourse',
+            as: 'Course',
+            foreignKey: 'studentId',
+            otherKey:"courseId",
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE'
+        })
+
     }
   }
   Student.init({
@@ -47,6 +58,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       departmentId: {
         type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         allowNull: false,
         references: {
           model: 'Departments',

@@ -3,9 +3,14 @@ const router = express.Router();
 
 const {createDepartment, getOneDepartment, getAllDepartments, updateDepartment, deleteDepartment} = require ('../controllers/departmentController.js')
 
-router.post('/newDepartment/:userId', createDepartment);
+
+const {createDepartmentValidation, updateDepartmentValidation } = require('../Middlewares/departmentValidation.js')
+
+router.post('/createDepartment', createDepartmentValidation,createDepartment);
 router.get('/allDepartment/', getAllDepartments)
 router.get('/oneDepartment/:id', getOneDepartment)
-router.patch('/updateDepartmentName/:department_name', updateDepartment)
+router.patch('/updateDepartment/:id', updateDepartmentValidation, updateDepartment)
 router.delete('/deleteDepartment/:id', deleteDepartment)
+
+
 module.exports = router
