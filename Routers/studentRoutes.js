@@ -1,7 +1,7 @@
 const express = require('express');
 
 const { createStudent, getAllStudents,   getOneStudent, updateStudent, deleteStudent } = require('../controllers/studentController');
-const { createStudentValidation } = require('../Middlewares/studentValidation');
+const { createStudentValidation, updateStudentValidation } = require('../Middlewares/studentValidation');
 
 const router = express.Router()
 
@@ -10,7 +10,7 @@ router.post('/createStudent/:departmentId',createStudentValidation, createStuden
 router.get('/allStudents', getAllStudents)
 
 router.get('/onestudent/:id',  getOneStudent)
-router.patch('/updateStudent/:id', updateStudent)
+router.patch('/updateStudent/:id', updateStudentValidation, updateStudent)
 router.delete('/deleteStudent/:id', deleteStudent)
 
 
