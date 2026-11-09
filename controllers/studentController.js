@@ -57,18 +57,23 @@ const getOneStudent = async(req,res) => {
     try {
         const { id } = req.params;
         const oneStudent = await Student.findByPk(id, {
-            include :{
-                model:Course,
-                include:{ through:"StudentCouse"}
-                   
-            },
-
             include:{
                 model: StudentProfile,
                 as: 'studentProfile',
                 attributes:[ "gender", "phonenumber"]
 
-            }
+            },
+
+            include :{
+                model:Course,
+                as:"courses",
+                attributes: ["courseCode", "courseTitle", "creditUnit"],
+                through: {
+                    model: StudentCourse,
+                    attributes:[]
+                }   
+                   
+            },
         })
         
 
