@@ -8,9 +8,9 @@ const createCourse = async(req, res)=> {
         const course = await Course.findOne({where: {courseCode}})
 
         if (course){
-            return res.status(200).json({message: "Course already exist"})
+            return res.status(400).json({message: "Course already exist"})
         }
-        
+
         const newCourse = await Course.create({
             courseCode, 
             courseTitle, 
