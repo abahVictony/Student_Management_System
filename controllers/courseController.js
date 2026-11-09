@@ -3,20 +3,18 @@ const { Course, Student, StudentCourse } = require("../models")
 
 const createCourse = async(req, res)=> {
     try{
-        const { studentId } = req.params;
         const { courseCode, courseTitle, creditUnit } = req.body;
 
-        const student = await Student.findByPk(studentId);
+        const course = await Course.findOne({where: {courseCode}})
 
-        if (!student){
-            return res.status(404).json({message:"Error creating New course: Student does not existed"})
+        if (course){
+            return res.status(200).json({message: "Course already exist"})
         }
-
+        
         const newCourse = await Course.create({
             courseCode, 
             courseTitle, 
             creditUnit,
-            studentId
         })
 
         return res.status(201).json({messsage:"Course successfully created", data:newCourse})
@@ -46,15 +44,15 @@ const getOneCourse = async(req,res) => {
     try {
         const { id } = req.params;
         const oneCourse = await Course.findByPk(id, {
-            include :{
+            include: {
                     model:Student,
                     as: 'students',
                     attributes: ["firstName", "lastName"],
-                     through:{
-                        model: StudentCourse,
-                        
-                     },
-
+                    through:{
+                        model:StudentCourse,
+                        attributes:[]
+                    },   
+                     
                 }
             }
         )

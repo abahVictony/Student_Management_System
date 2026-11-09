@@ -11,6 +11,8 @@ const studentProfileRoute = require('./Routers/studentProfileRoutes')
 
 const studentRoute = require('./Routers/studentRoutes')
 
+const studentCouresRoutes = require("./Routers/studentcourseRoutes")
+
 const PORT = process.env.PORT || 1221
 const app = express()
 
@@ -23,6 +25,8 @@ app.use(courseRoute)
 app.use(studentProfileRoute)
 
 app.use(studentRoute)
+
+app.use(studentCouresRoutes)
 
 const dbConnect = async()=>{
 try {
